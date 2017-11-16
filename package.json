@@ -1,0 +1,14 @@
+{
+  "name": "lametric-foli",
+  "version": "1.0.0",
+  "description": "this is the description",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "microcule index.js"
+  },
+  "dependencies": {
+    "microcule": "*"
+  },
+  "license": "MIT"
+}
