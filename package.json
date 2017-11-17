@@ -8,7 +8,9 @@
     "start": "microcule index.js"
   },
   "dependencies": {
-    "microcule": "*"
+    "axios": "^0.17.1",
+    "microcule": "*",
+    "moment": "^2.19.2"
   },
   "license": "MIT"
 }
