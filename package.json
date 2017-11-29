@@ -4,7 +4,9 @@
   "description": "Backend for LaMetric Föli app",
   "main": "index.js",
   "scripts": {
-    "start": "microcule index.js"
+    "start": "microcule index.js",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -18,7 +20,9 @@
   "dependencies": {
     "axios": "^0.17.1",
     "microcule": "*",
-    "moment": "^2.19.2"
+    "moment": "^2.19.2",
+    "snyk": "^1.52.0"
   },
-  "license": "Unlicense"
+  "license": "Unlicense",
+  "snyk": true
 }
