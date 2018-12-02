@@ -8,10 +8,7 @@
     "snyk-protect": "snyk protect",
     "prepare": "npm run snyk-protect"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/RauliL/lametric-foli.git"
-  },
+  "repository": "https://github.com/RauliL/lametric-foli.git",
   "bugs": {
     "url": "https://github.com/RauliL/lametric-foli/issues"
   },
