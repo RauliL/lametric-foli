@@ -1,25 +1,27 @@
 {
   "name": "lametric-foli",
+  "author": "Rauli Laine <rauli.laine@iki.fi>",
   "version": "1.0.0",
+  "license": "Unlicense",
   "description": "Backend for LaMetric Föli app",
+  "keywords": ["lametric", "microservice", "public transport"],
   "main": "index.js",
-  "scripts": {
-    "start": "microcule index.js",
-    "snyk-protect": "snyk protect",
-    "prepare": "npm run snyk-protect"
-  },
+  "homepage": "https://github.com/RauliL/lametric-foli",
   "repository": "https://github.com/RauliL/lametric-foli.git",
   "bugs": {
     "url": "https://github.com/RauliL/lametric-foli/issues"
   },
-  "homepage": "https://github.com/RauliL/lametric-foli",
-  "author": "Rauli Laine <rauli.laine@iki.fi>",
+  "bin": {
+    "lametric-foli": "./bin/lametric-foli"
+  },
+  "scripts": {
+    "start": "./bin/lametric-foli"
+  },
   "dependencies": {
     "axios": "^0.17.1",
-    "microcule": "*",
+    "debug": "^4.3.1",
+    "express": "^4.17.1",
     "moment": "^2.19.2",
-    "snyk": "^1.52.0"
-  },
-  "license": "Unlicense",
-  "snyk": true
+    "normalize-port": "^1.0.0"
+  }
 }

@@ -1,7 +1,12 @@
 const axios = require('axios');
+const express = require('express');
 const moment = require('moment');
 
-const sendError = (hook, message) => hook.res.json({
+const app = express();
+
+module.exports = app;
+
+const sendError = (res, message) => res.send({
   frames: [
     {
       text: message,
@@ -10,24 +15,23 @@ const sendError = (hook, message) => hook.res.json({
   ]
 });
 
-module.exports = hook => {
-  // Specify response content type and character set.
-  hook.res.setHeader('Content-Type', 'application/json; charset=utf-8');
+app.get('/', (req, res) => {
+  const { id } = req.query;
 
   // Bus stop ID is a required parameter so check it's existance.
-  if (!hook.params.id) {
-    sendError(hook, 'Missing bus stop ID');
+  if (!id) {
+    sendError(res, 'Missing bus stop ID');
     return;
   }
 
   // Attempt to retrieve arrival data from the Föli API.
-  axios.get(`http://data.foli.fi/siri/sm/${hook.params.id}`)
+  axios.get(`http://data.foli.fi/siri/sm/${id}`)
     .then(response => {
       const now = moment();
       const arrivals = response.data.result.filter(arrival => arrival.expectedarrivaltime >= now.unix());
 
       if (arrivals.length > 0) {
-        hook.res.json({
+        res.send({
           frames: arrivals.slice(0, 5).map(arrival => {
             const time = moment.unix(arrival.expectedarrivaltime);
             const line = arrival.lineref;
@@ -41,7 +45,7 @@ module.exports = hook => {
           })
         });
       } else {
-        hook.res.json({
+        res.send({
           frames: [{
             text: 'No arrivals',
             icon: 'föli'
@@ -49,5 +53,5 @@ module.exports = hook => {
         });
       }
     })
-    .catch(() => sendError(hook, 'Unable to connect to Föli API'));
-};
+    .catch(() => sendError(res, 'Unable to connect to Föli API'));
+});
