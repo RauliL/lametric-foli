@@ -1,0 +1,41 @@
+#!/usr/bin/env node
+
+const debug = require('debug')('lametric-foli:server');
+const http = require('http');
+const normalizePort = require('normalize-port');
+
+const server = http.createServer(require('../index'));
+
+server.on('error', (err) => {
+  if (err.syscall !== 'listen') {
+    throw err;
+  }
+
+  const bind = `${typeof port === 'string' ? 'Pipe' : 'Port'} ${port}`;
+
+  // Handle specific listen errors with friendly messages.
+  switch (error.code) {
+    case 'EACCES':
+      console.error(`${bind} requires elevated privileges`);
+      process.exit(1);
+      break;
+
+    case 'EADDRINUSE':
+      console.error(`${bind} is already in use`);
+      process.exit(1);
+      break;
+
+    default:
+      throw error;
+  }
+});
+
+server.on('listening', () => {
+  const address = server.address();
+  const bind = typeof address === 'string' ? `pipe ${address}` : `port ${address.port}`;
+
+  debug(`Listening on ${bind}`);
+});
+
+server.listen(normalizePort(process.env.PORT || '3000'));
+
