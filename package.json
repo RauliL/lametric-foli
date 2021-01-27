@@ -18,6 +18,9 @@
   "bin": {
     "lametric-foli": "./bin/lametric-foli"
   },
+  "engines": {
+    "node": ">=12"
+  },
   "scripts": {
     "start": "./bin/lametric-foli"
   },
