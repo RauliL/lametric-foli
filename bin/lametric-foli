@@ -5,6 +5,7 @@ const http = require('http');
 const normalizePort = require('normalize-port');
 
 const server = http.createServer(require('../index'));
+const port = normalizePort(process.env.PORT || '3000');
 
 server.on('error', (err) => {
   if (err.syscall !== 'listen') {
@@ -14,7 +15,7 @@ server.on('error', (err) => {
   const bind = `${typeof port === 'string' ? 'Pipe' : 'Port'} ${port}`;
 
   // Handle specific listen errors with friendly messages.
-  switch (error.code) {
+  switch (err.code) {
     case 'EACCES':
       console.error(`${bind} requires elevated privileges`);
       process.exit(1);
@@ -37,5 +38,5 @@ server.on('listening', () => {
   debug(`Listening on ${bind}`);
 });
 
-server.listen(normalizePort(process.env.PORT || '3000'));
+server.listen(port);
 
