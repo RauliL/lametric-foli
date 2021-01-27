@@ -1,18 +1,16 @@
-const axios = require('axios');
 const express = require('express');
 const moment = require('moment');
+const fetch = require('node-fetch');
 
 const app = express();
 
 module.exports = app;
 
 const sendError = (res, message) => res.send({
-  frames: [
-    {
-      text: message,
-      icon: 'stop'
-    }
-  ]
+  frames: [{
+    text: message,
+    icon: 'stop'
+  }]
 });
 
 app.get('/', (req, res) => {
@@ -25,10 +23,11 @@ app.get('/', (req, res) => {
   }
 
   // Attempt to retrieve arrival data from the Föli API.
-  axios.get(`http://data.foli.fi/siri/sm/${id}`)
+  fetch(`http://data.foli.fi/siri/sm/${id}`)
+    .then(response => response.json())
     .then(response => {
       const now = moment();
-      const arrivals = response.data.result.filter(arrival => arrival.expectedarrivaltime >= now.unix());
+      const arrivals = response.result.filter(arrival => arrival.expectedarrivaltime >= now.unix());
 
       if (arrivals.length > 0) {
         res.send({

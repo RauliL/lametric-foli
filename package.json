@@ -4,7 +4,11 @@
   "version": "2.0.0",
   "license": "Unlicense",
   "description": "Backend for LaMetric Föli app",
-  "keywords": ["lametric", "microservice", "public transport"],
+  "keywords": [
+    "lametric",
+    "microservice",
+    "public transport"
+  ],
   "main": "index.js",
   "homepage": "https://github.com/RauliL/lametric-foli",
   "repository": "https://github.com/RauliL/lametric-foli.git",
@@ -18,10 +22,10 @@
     "start": "./bin/lametric-foli"
   },
   "dependencies": {
-    "axios": "^0.17.1",
     "debug": "^4.3.1",
     "express": "^4.17.1",
     "moment": "^2.19.2",
+    "node-fetch": "^2.6.1",
     "normalize-port": "^1.0.0"
   }
 }
