@@ -1,7 +1,7 @@
 {
   "name": "lametric-foli",
   "author": "Rauli Laine <rauli.laine@iki.fi>",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "license": "Unlicense",
   "description": "Backend for LaMetric Föli app",
   "keywords": [
