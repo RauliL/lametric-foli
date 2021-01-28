@@ -1,5 +1,5 @@
+const { format: formatDate, formatDistance, fromUnixTime, getUnixTime } = require('date-fns');
 const express = require('express');
-const moment = require('moment');
 const fetch = require('node-fetch');
 
 const app = express();
@@ -14,7 +14,7 @@ const sendError = (res, message) => res.send({
 });
 
 app.get('/', (req, res) => {
-  const { id } = req.query;
+  const { format, id } = req.query;
 
   // Bus stop ID is a required parameter so check it's existance.
   if (!id) {
@@ -22,26 +22,34 @@ app.get('/', (req, res) => {
     return;
   }
 
+  const renderArrivalTime = (expectedArrivalTime, now) => {
+    switch (format) {
+      case 'Distance':
+        return formatDistance(expectedArrivalTime, now);
+
+      case '12 hour clock':
+        return formatDate(expectedArrivalTime, 'hh:mma');
+
+      case '24 hour clock':
+      default:
+        return formatDate(expectedArrivalTime, 'HH:mm');
+    }
+  };
+
   // Attempt to retrieve arrival data from the Föli API.
   fetch(`http://data.foli.fi/siri/sm/${id}`)
     .then(response => response.json())
     .then(response => {
-      const now = moment();
-      const arrivals = response.result.filter(arrival => arrival.expectedarrivaltime >= now.unix());
+      const now = Date.now();
+      const unixNow = getUnixTime(now);
+      const arrivals = response.result.filter(arrival => arrival.expectedarrivaltime >= unixNow);
 
       if (arrivals.length > 0) {
         res.send({
-          frames: arrivals.slice(0, 5).map(arrival => {
-            const time = moment.unix(arrival.expectedarrivaltime);
-            const line = arrival.lineref;
-            const display = arrival.destinationdisplay;
-            const difference = time.diff(now, 'minutes');
-
-            return {
-              text: `${difference} min - ${line} / ${display}`,
-              icon: 'föli'
-            };
-          })
+          frames: arrivals.slice(0, 5).map(arrival => ({
+            text: `${renderArrivalTime(fromUnixTime(arrival.expectedarrivaltime), now)} - ${arrival.lineref} / ${arrival.destinationdisplay}`,
+            icon: 'föli'
+          }))
         });
       } else {
         res.send({

@@ -26,9 +26,9 @@
     "start:dev": "nodemon ./bin/lametric-foli"
   },
   "dependencies": {
+    "date-fns": "^2.16.1",
     "debug": "^4.3.1",
     "express": "^4.17.1",
-    "moment": "^2.19.2",
     "node-fetch": "^2.6.1",
     "normalize-port": "^1.0.0"
   },
