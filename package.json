@@ -29,7 +29,7 @@
     "date-fns": "^2.16.1",
     "debug": "^4.3.1",
     "express": "^4.17.1",
-    "node-fetch": "^2.6.1",
+    "node-fetch": "^3.1.1",
     "normalize-port": "^1.0.0"
   },
   "devDependencies": {
