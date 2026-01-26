@@ -1,15 +1,22 @@
 {
   "name": "lametric-foli",
   "author": "Rauli Laine <rauli.laine@iki.fi>",
-  "version": "2.1.0",
+  "version": "3.0.0",
   "license": "Unlicense",
   "description": "Backend for LaMetric Föli app",
+  "files": [
+    "./bin",
+    "./dist"
+  ],
   "keywords": [
     "lametric",
     "microservice",
     "public transport"
   ],
-  "main": "index.js",
+  "main": "./dist/index.js",
+  "main:src": "./src/index.ts",
+  "types": "./dist/index.d.ts",
+  "type": "module",
   "homepage": "https://github.com/RauliL/lametric-foli",
   "repository": "https://github.com/RauliL/lametric-foli.git",
   "bugs": {
@@ -19,20 +26,41 @@
     "lametric-foli": "./bin/lametric-foli"
   },
   "engines": {
-    "node": ">=12"
+    "node": ">=24"
   },
   "scripts": {
     "start": "./bin/lametric-foli",
-    "start:dev": "nodemon ./bin/lametric-foli"
+    "start:dev": "nodemon ./bin/lametric-foli",
+    "build": "tsc",
+    "watch": "tsc -w",
+    "clean": "rimraf './dist'",
+    "lint": "eslint './src/**/*'",
+    "test": "vitest run",
+    "prebuild": "$npm_execpath run clean",
+    "prepack": "$npm_execpath run build"
   },
   "dependencies": {
-    "date-fns": "^2.16.1",
-    "debug": "^4.3.1",
-    "express": "^4.17.1",
-    "node-fetch": "^2.6.1",
-    "normalize-port": "^1.0.0"
+    "date-fns": "^4.1.0",
+    "debug": "^4.4.3",
+    "express": "^5.2.1",
+    "node-fetch": "^3.3.2",
+    "normalize-port": "^1.0.0",
+    "url-join": "^5.0.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.7"
+    "@eslint/js": "^9.39.2",
+    "@types/express": "^5.0.6",
+    "@types/supertest": "^6.0.3",
+    "@vitest/coverage-v8": "^4.0.18",
+    "eslint": "^9.39.2",
+    "eslint-config-prettier": "^10.1.8",
+    "msw": "^2.12.7",
+    "nodemon": "^3.1.11",
+    "prettier": "^3.8.1",
+    "rimraf": "^6.1.2",
+    "supertest": "^7.2.2",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.53.1",
+    "vitest": "^4.0.18"
   }
 }

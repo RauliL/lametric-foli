@@ -1,27 +1,30 @@
 #!/usr/bin/env node
 
-const debug = require('debug')('lametric-foli:server');
-const http = require('http');
-const normalizePort = require('normalize-port');
+import debug from "debug";
+import http from "http";
+import normalizePort from "normalize-port";
 
-const server = http.createServer(require('../index'));
-const port = normalizePort(process.env.PORT || '3000');
+import app from "../dist/index.js";
 
-server.on('error', (err) => {
-  if (err.syscall !== 'listen') {
+const log = debug("lametric-foli:server");
+const server = http.createServer(app);
+const port = normalizePort(process.env.PORT || "3000");
+
+server.on("error", (err) => {
+  if (err.syscall !== "listen") {
     throw err;
   }
 
-  const bind = `${typeof port === 'string' ? 'Pipe' : 'Port'} ${port}`;
+  const bind = `${typeof port === "string" ? "Pipe" : "Port"} ${port}`;
 
   // Handle specific listen errors with friendly messages.
   switch (err.code) {
-    case 'EACCES':
+    case "EACCES":
       console.error(`${bind} requires elevated privileges`);
       process.exit(1);
       break;
 
-    case 'EADDRINUSE':
+    case "EADDRINUSE":
       console.error(`${bind} is already in use`);
       process.exit(1);
       break;
@@ -31,12 +34,12 @@ server.on('error', (err) => {
   }
 });
 
-server.on('listening', () => {
+server.on("listening", () => {
   const address = server.address();
-  const bind = typeof address === 'string' ? `pipe ${address}` : `port ${address.port}`;
+  const bind =
+    typeof address === "string" ? `pipe ${address}` : `port ${address.port}`;
 
-  debug(`Listening on ${bind}`);
+  log(`Listening on ${bind}`);
 });
 
 server.listen(port);
-
