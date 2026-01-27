@@ -58,7 +58,7 @@ describe("LaMetric Föli server", () => {
       }));
 
   it("should return timetables returned from the API that are in the future", () => {
-    vi.setSystemTime(new Date(2026, 26, 1, 18, 0, 0));
+    vi.setSystemTime(new Date("2028-03-01T16:00:00.000Z"));
 
     return request(app)
       .get("/?id=T42")
@@ -70,7 +70,7 @@ describe("LaMetric Föli server", () => {
   });
 
   it("should not return timetables returned from the API that are in the past", () => {
-    vi.setSystemTime(new Date(2026, 26, 1, 19, 0, 0));
+    vi.setSystemTime(new Date("2028-03-01T17:00:00.000Z"));
 
     return request(app)
       .get("/?id=T42")
@@ -86,7 +86,7 @@ describe("LaMetric Föli server", () => {
     ["12+hour+clock", "06:30PM"],
     ["24+hour+clock", "18:30"],
   ])("should support three different time formats", (format, expected) => {
-    vi.setSystemTime(new Date(2026, 26, 1, 18, 0, 0));
+    vi.setSystemTime(new Date("2028-03-01T16:00:00.000Z"));
 
     return request(app)
       .get(`/?id=T42&format=${format}`)
