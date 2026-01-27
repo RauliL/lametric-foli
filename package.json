@@ -35,7 +35,7 @@
     "watch": "tsc -w",
     "clean": "rimraf './dist'",
     "lint": "eslint './src/**/*'",
-    "test": "vitest run",
+    "test": "cross-env TZ=UTC vitest run",
     "prebuild": "$npm_execpath run clean",
     "prepack": "$npm_execpath run build"
   },
@@ -52,6 +52,7 @@
     "@types/express": "^5.0.6",
     "@types/supertest": "^6.0.3",
     "@vitest/coverage-v8": "^4.0.18",
+    "cross-env": "^10.1.0",
     "eslint": "^9.39.2",
     "eslint-config-prettier": "^10.1.8",
     "msw": "^2.12.7",

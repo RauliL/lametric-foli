@@ -64,7 +64,7 @@ describe("LaMetric Föli server", () => {
       .get("/?id=T42")
       .then((response) => {
         expect(response.body).toEqual({
-          frames: [{ icon: "föli", text: "18:30 - Linja / T42" }],
+          frames: [{ icon: "föli", text: "16:30 - Linja / T42" }],
         });
       });
   });
@@ -83,8 +83,8 @@ describe("LaMetric Föli server", () => {
 
   it.each([
     ["Distance", "30 minutes"],
-    ["12+hour+clock", "06:30PM"],
-    ["24+hour+clock", "18:30"],
+    ["12+hour+clock", "04:30PM"],
+    ["24+hour+clock", "16:30"],
   ])("should support three different time formats", (format, expected) => {
     vi.setSystemTime(new Date("2028-03-01T16:00:00.000Z"));
 
