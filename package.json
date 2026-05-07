@@ -43,7 +43,6 @@
     "date-fns": "^4.1.0",
     "debug": "^4.4.3",
     "express": "^5.2.1",
-    "node-fetch": "^3.3.2",
     "normalize-port": "^1.0.0",
     "url-join": "^5.0.0"
   },

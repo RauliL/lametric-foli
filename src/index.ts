@@ -5,7 +5,6 @@ import {
   getUnixTime,
 } from "date-fns";
 import express, { Response } from "express";
-import fetch from "node-fetch";
 import urlJoin from "url-join";
 
 export type FoliResponse = {
